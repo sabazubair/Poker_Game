@@ -24,8 +24,8 @@ impl fmt::Display for Suit {
   }
 }
 
-impl From<i32> for Suit {
-  fn from(idx: i32) -> Self {
+impl From<u32> for Suit {
+  fn from(idx: u32) -> Self {
     match idx {
       0 => Self::Clubs,
       1 => Self::Diamonds,

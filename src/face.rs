@@ -78,8 +78,8 @@ impl FromStr for Face {
   }
 }
 
-impl From<i32> for Face {
-  fn from(idx: i32) -> Self {
+impl From<u32> for Face {
+  fn from(idx: u32) -> Self {
     match idx {
       0 => Self::Ace,
       1 => Self::Two,

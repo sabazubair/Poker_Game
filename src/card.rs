@@ -23,8 +23,8 @@ impl fmt::Display for Card {
   }
 }
 
-impl From<i32> for Card {
-  fn from(idx: i32) -> Self {
+impl From<u32> for Card {
+  fn from(idx: u32) -> Self {
     Self {
       suit: ((idx - 1) / 13).into(),
       face: ((idx - 1) % 13).into(),
