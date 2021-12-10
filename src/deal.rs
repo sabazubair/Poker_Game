@@ -52,6 +52,11 @@ impl Deal {
       .map(|v| Hand::new(v.as_slice()))
       .collect()
   }
+  pub fn best_hand(&self) -> Hand {
+    let mut hands = self.combinations();
+    hands.sort();
+    hands.pop().unwrap()
+  }
 }
 
 impl fmt::Display for Deal {

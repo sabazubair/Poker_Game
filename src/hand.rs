@@ -1,12 +1,20 @@
 use crate::Card;
 use crate::Face;
+use crate::Rank;
 use crate::Suit;
+use std::cmp::Ordering;
 use std::fmt;
 use std::str::FromStr;
 
-#[derive(Clone, Debug, Copy, Eq, PartialEq)]
+#[derive(Clone, Debug, Copy, Eq, PartialEq, Ord)]
 pub struct Hand {
   cards: [Card; 5],
+}
+
+impl PartialOrd for Hand {
+  fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+    self.rank().partial_cmp(&other.rank())
+  }
 }
 
 impl Hand {
@@ -46,6 +54,9 @@ impl Hand {
     suits.sort();
     suits.reverse();
     (faces[0..5].try_into().unwrap(), suits, self.is_straight())
+  }
+  pub fn rank(&self) -> Rank {
+    self.into()
   }
 }
 

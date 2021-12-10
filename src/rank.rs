@@ -1,22 +1,22 @@
 use crate::Face;
 use crate::Hand;
 
-#[derive(Clone, Debug, Copy, Eq, PartialEq)]
+#[derive(Clone, Debug, Copy, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Rank {
-  RoyalFlush,
-  StraightFlush(Face),
-  FourOfAKind(Face, [Face; 1]),
-  FullHouse(Face, Face),
-  Flush([Face; 5]),
-  Straight(Face),
-  ThreeOfAKind(Face, [Face; 2]),
-  TwoPair(Face, Face, [Face; 1]),
-  Pair(Face, [Face; 3]),
   HighCard([Face; 5]),
+  Pair(Face, [Face; 3]),
+  TwoPair(Face, Face, [Face; 1]),
+  ThreeOfAKind(Face, [Face; 2]),
+  Straight(Face),
+  Flush([Face; 5]),
+  FullHouse(Face, Face),
+  FourOfAKind(Face, [Face; 1]),
+  StraightFlush(Face),
+  RoyalFlush,
 }
 
-impl From<Hand> for Rank {
-  fn from(hand: Hand) -> Self {
+impl From<&Hand> for Rank {
+  fn from(hand: &Hand) -> Self {
     match hand.counts() {
       (
         [(1, Face::Ace), (1, Face::King), (1, Face::Queen), (1, Face::Jack), (1, Face::Ten)],
@@ -37,7 +37,14 @@ impl From<Hand> for Rank {
     }
   }
 }
-// impl Ord
+
+impl From<Hand> for Rank {
+  // for tests only
+  fn from(hand: Hand) -> Self {
+    (&hand).into()
+  }
+}
+
 #[cfg(test)]
 mod tests {
   use super::*;
@@ -113,5 +120,27 @@ mod tests {
       Rank::HighCard([Face::Ace, Face::King, Face::Queen, Face::Nine, Face::Seven]),
       rank
     );
+  }
+  #[test]
+  fn test_ord() {
+    let hands: Vec<Hand> = vec![
+      "AH KS QD 9S 7H",
+      "AH AD KD JS 7H",
+      "AH AD KD KS 7H",
+      "AH AD AC KS QH",
+      "TH 9C 8D 7S 6H",
+      "KC TC 8C 7C 5C",
+      "AH AC AD KS KH",
+      "AH AC AD AS KH",
+      "6H 7H 8H 9H TH",
+      "AH KH QH JH TH",
+    ]
+    .into_iter()
+    .map(|s| s.parse().unwrap())
+    .collect();
+    let mut reversed = hands.clone();
+    reversed.reverse();
+    reversed.sort();
+    assert_eq!(hands, reversed);
   }
 }
