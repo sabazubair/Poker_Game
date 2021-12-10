@@ -12,3 +12,4 @@ mod rank;
 pub use rank::Rank;
 mod suit;
 pub use suit::Suit;
+pub mod poker;

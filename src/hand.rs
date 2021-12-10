@@ -58,6 +58,9 @@ impl Hand {
   pub fn rank(&self) -> Rank {
     self.into()
   }
+  pub fn as_str_vec(&self) -> Vec<String> {
+    self.cards.map(|c| c.to_string()).to_vec()
+  }
 }
 
 impl FromStr for Hand {
