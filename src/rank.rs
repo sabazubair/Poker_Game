@@ -75,10 +75,10 @@ mod tests {
   }
   #[test]
   fn test_flush() {
-    let hand: Hand = "KC TC 8C 7C 5C".parse().unwrap();
+    let hand: Hand = "2S 4S 6S 9S 5S".parse().unwrap();
     let rank: Rank = hand.into();
     assert_eq!(
-      Rank::Flush([Face::King, Face::Ten, Face::Eight, Face::Seven, Face::Five]),
+      Rank::Flush([Face::Nine, Face::Six, Face::Five, Face::Four, Face::Two]),
       rank
     );
   }

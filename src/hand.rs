@@ -6,7 +6,7 @@ use std::cmp::Ordering;
 use std::fmt;
 use std::str::FromStr;
 
-#[derive(Clone, Debug, Copy, Eq, PartialEq, Ord)]
+#[derive(Clone, Debug, Copy, Eq, PartialEq)]
 pub struct Hand {
   cards: [Card; 5],
 }
@@ -14,6 +14,12 @@ pub struct Hand {
 impl PartialOrd for Hand {
   fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
     self.rank().partial_cmp(&other.rank())
+  }
+}
+
+impl Ord for Hand {
+  fn cmp(&self, other: &Self) -> Ordering {
+    self.rank().cmp(&other.rank())
   }
 }
 
@@ -53,6 +59,9 @@ impl Hand {
     faces.reverse();
     suits.sort();
     suits.reverse();
+    if faces[0].1 == Face::Ace && self.is_straight() && faces[1].1 != Face::King {
+      faces.rotate_left(1);
+    }
     (faces[0..5].try_into().unwrap(), suits, self.is_straight())
   }
   pub fn rank(&self) -> Rank {

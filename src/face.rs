@@ -54,7 +54,7 @@ impl fmt::Display for Face {
       f,
       "{}",
       match self {
-        Self::Ace => "A",
+        Self::Ace => "1",
         Self::Two => "2",
         Self::Three => "3",
         Self::Four => "4",
@@ -63,10 +63,10 @@ impl fmt::Display for Face {
         Self::Seven => "7",
         Self::Eight => "8",
         Self::Nine => "9",
-        Self::Ten => "T",
-        Self::Jack => "J",
-        Self::Queen => "Q",
-        Self::King => "K",
+        Self::Ten => "10",
+        Self::Jack => "11",
+        Self::Queen => "12",
+        Self::King => "13",
       }
     )
   }
