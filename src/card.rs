@@ -4,10 +4,10 @@ use std::str::FromStr;
 use crate::Face;
 use crate::Suit;
 
-#[derive(Clone, Debug, Copy, Eq, PartialEq)]
+#[derive(Clone, Debug, Copy, Eq, PartialEq, Ord, PartialOrd)]
 pub struct Card {
-  suit: Suit,
   face: Face,
+  suit: Suit,
 }
 impl Card {
   pub fn suit(&self) -> Suit {
@@ -17,6 +17,7 @@ impl Card {
     self.face
   }
 }
+
 impl fmt::Display for Card {
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     write!(f, "{}{}", self.face, self.suit)
@@ -60,5 +61,13 @@ mod tests {
     assert_eq!(Card::from(16), card);
     let card: Card = "QH".parse().unwrap();
     assert_eq!(Card::from(38), card);
+  }
+  #[test]
+  fn test_ord() {
+    let card_3d: Card = "3D".parse().unwrap();
+    let card_qh: Card = "QH".parse().unwrap();
+    let card_as: Card = "AS".parse().unwrap();
+    assert!(card_qh > card_3d);
+    assert!(card_as > card_qh);
   }
 }

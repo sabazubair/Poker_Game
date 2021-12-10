@@ -1,12 +1,23 @@
 use std::fmt;
 use std::str::FromStr;
 
-#[derive(Clone, Debug, Copy, Eq, PartialEq)]
+#[derive(Clone, Debug, Copy, Eq, PartialEq, Ord, PartialOrd)]
 pub enum Suit {
   Clubs,
   Diamonds,
   Hearts,
   Spades,
+}
+
+impl Suit {
+  pub fn counters() -> [(u8, Self); 4] {
+    [
+      (0, Self::Clubs),
+      (0, Self::Diamonds),
+      (0, Self::Hearts),
+      (0, Self::Spades),
+    ]
+  }
 }
 
 impl fmt::Display for Suit {

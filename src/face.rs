@@ -23,6 +23,23 @@ impl Face {
   pub fn is_ace(&self) -> bool {
     self == &Self::Ace
   }
+  pub fn counters() -> [(u8, Self); 13] {
+    [
+      (0, Self::Two),
+      (0, Self::Three),
+      (0, Self::Four),
+      (0, Self::Five),
+      (0, Self::Six),
+      (0, Self::Seven),
+      (0, Self::Eight),
+      (0, Self::Nine),
+      (0, Self::Ten),
+      (0, Self::Jack),
+      (0, Self::Queen),
+      (0, Self::King),
+      (0, Self::Ace),
+    ]
+  }
 }
 
 // impl Ord for Face {
