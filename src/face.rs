@@ -1,5 +1,4 @@
 use std::fmt;
-// use std::cmp::Ordering;
 use std::str::FromStr;
 
 #[derive(Clone, Debug, Copy, Eq, PartialEq, Ord, PartialOrd)]
@@ -41,12 +40,6 @@ impl Face {
     ]
   }
 }
-
-// impl Ord for Face {
-//   fn cmp(&self, other: &Self) -> Ordering {
-
-//   }
-// }
 
 impl fmt::Display for Face {
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

@@ -78,7 +78,6 @@ impl fmt::Display for Deal {
 #[cfg(test)]
 mod tests {
   use super::*;
-
   #[test]
   fn test_to_string() {
     let deal = Deal::new(
